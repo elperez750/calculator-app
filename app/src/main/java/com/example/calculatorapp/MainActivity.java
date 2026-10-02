@@ -12,6 +12,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    boolean isGreeting = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +27,21 @@ public class MainActivity extends AppCompatActivity {
         Button changeButton = findViewById(R.id.changeButton);
 
 
+
         changeButton.setOnClickListener(v -> {
-            helloText.setText("Hello Elliottt");
+            if (isGreeting) {
+                helloText.setText("Hello World");
+                isGreeting = false;
+            }
+            else{
+                helloText.setText("Hello Elliott");
+                isGreeting = true;
+            }
+
         });
+
+
+
 
             ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
