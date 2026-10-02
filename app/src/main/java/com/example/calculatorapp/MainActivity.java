@@ -62,24 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        TextView helloText = findViewById(R.id.helloText);
-        Button changeButton = findViewById(R.id.changeButton);
-
-
-
-        changeButton.setOnClickListener(v -> {
-            if (isGreeting) {
-                helloText.setText("Hello World");
-                isGreeting = false;
-            }
-            else{
-                helloText.setText("Hello Elliott");
-                isGreeting = true;
-            }
-
-        });
-
-
 
 
             ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
