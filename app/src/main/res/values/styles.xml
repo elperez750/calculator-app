@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Calc.Button">
-        <item name="android:textSize">26sp</item>
-        <item name="cornerRadius">40dp</item>
+
+    <!-- Base style: number keys (dark gray) -->
+    <style name="Calc.Button" parent="">
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="backgroundTint">#5F5B73</item>
     </style>
+
+    <!-- Operators: / * + - = ( ) -->
+    <style name="Calc.Button.Operator">
+        <item name="backgroundTint">#FF9800</item>
+    </style>
+
+    <!-- The 0 key (spec: #FF8033) -->
+    <style name="Calc.Button.Zero">
+        <item name="backgroundTint">#FF8033</item>
+    </style>
+
+    <!-- AC key (spec: #FF3377) -->
+    <style name="Calc.Button.AC">
+        <item name="backgroundTint">#FF3377</item>
+    </style>
+
+    <!-- C key (spec: #337DFF) -->
+    <style name="Calc.Button.C">
+        <item name="backgroundTint">#337DFF</item>
+    </style>
+
 </resources>
