@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             tvExpression.setText("");   // what text makes it "disappear"?
         }
         if (key.equals("AC")) {
-            // TODO 1: empty the
+
             expression.setLength(0);
         } else if (key.equals("C")) {
             if (expression.length() > 0) {
@@ -110,12 +110,23 @@ public class MainActivity extends AppCompatActivity {
                 expression.setLength(expression.length()-1);
             }
         } else if (key.equals("=")) {
-            // leave this empty for now, we'll do it later
+            // leave this empty for now, we'll do it
+            try{
+                String result = ExpressionEvaluator.evaluate(expression.toString());
+                expression.setLength(0);
+                expression.append(result);
+
+            }
+            catch(ArithmeticException | IllegalArgumentException e) {
+                tvResult.setText("There is an error");
+                expression.setLength(0);
+            }
+
         } else {
             expression.append(key);
         }
 
-        // TODO 4: make the screen match the expression
+
     }
 
 
