@@ -52,11 +52,15 @@ public class ExpressionEvaluator {
      * @return the value of the parsed expression
      */
     public BigDecimal parseExpression(){
+            // We will begin the recursive calls here
+            // This will always return a number to us
             BigDecimal value = parseTerm();
 
+            // we have to ensure that the current position is smaller that the input length
             while(pos < input.length()) {
                 char c = input.charAt(pos);
                 if (c == '+') {
+                    // We skip the '+' since we want the number on the other side of it
                     pos++;
                     value = value.add(parseTerm());
                 }
@@ -82,6 +86,11 @@ public class ExpressionEvaluator {
      * @throws ArithmeticException if dividing by zero
      */
     public BigDecimal parseTerm() {
+
+        // This function will also return a number
+        // This is identical to the parse expression function
+        // The only difference is that this function will handle multiplication and division
+
         BigDecimal value = parseFactor();
         while (pos < input.length()) {
             char c = input.charAt(pos);
@@ -124,6 +133,8 @@ public class ExpressionEvaluator {
                 && (Character.isDigit(input.charAt(pos)) || input.charAt(pos) == '.')) {
             pos++;
         }
+
+        // This
         return new BigDecimal(input.substring(start, pos));
     }
 

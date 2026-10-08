@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateDisplay() {
             if (showingError) {
-                tvResult.setText("Error"); return;
+                tvResult.setText("Error in the statement"); return;
             }
             if (expression.length() == 0) {
                 tvResult.setText("0");
