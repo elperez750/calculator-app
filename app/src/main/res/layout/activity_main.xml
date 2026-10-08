@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:text="CWU ID"
+            android:text="49651530"
             android:textSize="20sp" />
 
         <TextView

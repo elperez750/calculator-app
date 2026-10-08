@@ -11,52 +11,48 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.util.Log;
 
+
+
+/**
+ * Main screen of the calculator app.
+ * <p>
+ * Every key press appends to an expression string, which is evaluated by
+ * {@link ExpressionEvaluator} when "=" is pressed. On launch, the display
+ * shows the developer's last name and CWU ID until the first key is pressed.
+ */
 public class MainActivity extends AppCompatActivity {
 
 
+    /** The expression the user has typed so far. Persists between key presses. */
     private StringBuilder expression = new StringBuilder();
+
+    /** Large display line showing the current input, result, or error. */
+
     private TextView tvResult;
 
+    /** Small display line above the result. Shows the CWU ID at startup. */
+
     private TextView tvExpression;
+
+
+    /** True until the first key press, while the name and CWU ID are visible. */
+
     private boolean showingIntro = true;
 
+    /** True when the last "=" failed, so the display shows "Error". */
+
+    private boolean showingError = false;
 
 
 
 
+    /**
+     * Sets up the layout, connects the display views, and attaches one
+     * click listener to every calculator key.
+     *
+     * @param savedInstanceState previously saved state, or null on first launch
+     */
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("Lifecycle", "onStart called");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("Lifecycle", "onResume called");
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d("Lifecycle", "onPause called");
-    }
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("Lifecycle", "onStop called");
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("Lifecycle", "onDestroy called");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +92,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    /**
+     * Updates the expression based on the pressed key.
+     * <ul>
+     *   <li>"AC" clears the whole expression.</li>
+     *   <li>"C" removes the last character.</li>
+     *   <li>"=" evaluates the expression and replaces it with the result,
+     *       or flags an error if the expression is invalid.</li>
+     *   <li>Any other key is appended to the expression.</li>
+     * </ul>
+     * The first key press also hides the startup CWU ID text, and any
+     * previous error is cleared.
+     *
+     * @param key the text on the pressed key, such as "7", "+", or "AC"
+     */
     private void onKeyPressed(String key) {
+        showingError = false;
         if (showingIntro) {
             showingIntro = false;
             tvExpression.setText("");   // what text makes it "disappear"?
@@ -118,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             catch(ArithmeticException | IllegalArgumentException e) {
-                tvResult.setText("There is an error");
+                showingError = true;
                 expression.setLength(0);
             }
 
@@ -132,7 +144,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    /**
+     * Makes the large display match the current state: "Error" after a
+     * failed calculation, "0" when the expression is empty, or the
+     * expression text otherwise.
+     */
     private void updateDisplay() {
+            if (showingError) {
+                tvResult.setText("Error"); return;
+            }
             if (expression.length() == 0) {
                 tvResult.setText("0");
             } else {
